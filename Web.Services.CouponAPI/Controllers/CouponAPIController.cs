@@ -81,6 +81,7 @@ namespace Web.Services.CouponAPI.Controllers
                 _context.Add(obj);
                 _context.SaveChanges();
                 _response.Result = _mapper.Map<CouponDto>(obj);
+                _response.Message = "Coupon created Successfully !!!";
             }
             catch (Exception ex)
             {
@@ -117,7 +118,7 @@ namespace Web.Services.CouponAPI.Controllers
                 Coupon obj = _context.Coupons.First(c => c.CouponId == id);
                 _context.Coupons.Remove(obj);
                 _context.SaveChanges();
-                _response.Message = "Deleted Successfully !!!";
+                _response.Message = "Coupon deleted Successfully !!!";
             }
             catch (Exception ex)
             {

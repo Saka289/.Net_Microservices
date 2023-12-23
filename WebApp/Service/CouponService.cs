@@ -28,7 +28,7 @@ namespace WebApp.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = SD.CouponAPIBase + "/api/CouponAPI" + id
+                Url = SD.CouponAPIBase + "/api/CouponAPI/" + id
             });
         }
 
@@ -46,7 +46,7 @@ namespace WebApp.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = SD.ApiType.GET,
-                Url = SD.CouponAPIBase + "/api/CouponAPI/GetByCode" + couponCode
+                Url = SD.CouponAPIBase + "/api/CouponAPI/GetByCode/" + couponCode
             });
         }
 
@@ -55,7 +55,7 @@ namespace WebApp.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = SD.ApiType.GET,
-                Url = SD.CouponAPIBase + "/api/CouponAPI" + id
+                Url = SD.CouponAPIBase + "/api/CouponAPI/" + id
             });
         }
 
