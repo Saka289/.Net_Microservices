@@ -1,4 +1,4 @@
-﻿namespace Web.Services.ShoppingCartAPI.Models.Dto
+﻿namespace WebApp.Models
 {
     public class CartDto
     {

@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace Web.Services.ShoppingCartAPI.Models.Dto
+﻿namespace WebApp.Models
 {
     public class CartHeaderDto
     {
