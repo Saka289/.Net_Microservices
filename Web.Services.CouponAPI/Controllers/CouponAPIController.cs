@@ -83,6 +83,18 @@ namespace Web.Services.CouponAPI.Controllers
                 Coupon obj = _mapper.Map<Coupon>(couponDto);
                 _context.Add(obj);
                 _context.SaveChanges();
+
+                var options = new Stripe.CouponCreateOptions
+                {
+                    AmountOff = (long)(couponDto.DiscountAmount * 100),
+                    Name = couponDto.CouponCode,
+                    Currency = "usd",
+                    Id = couponDto.CouponCode
+                };
+                var service = new Stripe.CouponService();
+                service.Create(options);
+
+
                 _response.Result = _mapper.Map<CouponDto>(obj);
                 _response.Message = "Coupon created Successfully !!!";
             }
@@ -124,6 +136,9 @@ namespace Web.Services.CouponAPI.Controllers
                 _context.Coupons.Remove(obj);
                 _context.SaveChanges();
                 _response.Message = "Coupon deleted Successfully !!!";
+
+                var service = new Stripe.CouponService();
+                service.Delete(obj.CouponCode);
             }
             catch (Exception ex)
             {
