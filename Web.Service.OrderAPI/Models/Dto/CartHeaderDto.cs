@@ -1,4 +1,6 @@
-﻿namespace Web.Service.EmailAPI.Models.Dto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Web.Service.OrderAPI.Models.Dto
 {
     public class CartHeaderDto
     {
