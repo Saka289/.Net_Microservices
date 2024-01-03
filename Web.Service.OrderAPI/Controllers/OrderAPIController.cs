@@ -18,16 +18,20 @@ namespace Web.Service.OrderAPI.Controllers
     public class OrderAPIController : ControllerBase
     {
         protected ResponseDto _response;
+        private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
         private readonly AppDbContext _context;
         private readonly IProductService _productService;
+        private readonly IMessageBus _messageBus;
 
-        public OrderAPIController(IMapper mapper, AppDbContext context, IProductService productService)
+        public OrderAPIController(IMapper mapper, AppDbContext context, IProductService productService, IMessageBus messageBus, IConfiguration configuration)
         {
             _context = context;
             this._response = new ResponseDto();
             _mapper = mapper;
             _productService = productService;
+            _messageBus = messageBus;
+            _configuration = configuration;
         }
 
         [Authorize]
@@ -137,6 +141,15 @@ namespace Web.Service.OrderAPI.Controllers
                     orderHeader.PaymentIntentId = paymentIntent.Id;
                     orderHeader.Status = SD.Status_Approved;
                     await _context.SaveChangesAsync();
+                    RewardsDto rewardsDto = new()
+                    {
+                        OrderId = orderHeader.OrderHeaderId,
+                        RewardsActivity = Convert.ToInt32(orderHeader.OrderTotal),
+                        UserId = orderHeader.UserId,
+                        Email = orderHeader.Email
+                    };
+                    string topicName = _configuration.GetValue<string>("TopicAndQueueNames:OrderCreatedTopic");
+                    await _messageBus.PublishMessage(rewardsDto, topicName);
                     _response.Result = _mapper.Map<OrderHeaderDto>(orderHeader);
                 }
             }

@@ -7,6 +7,7 @@ using System.Text;
 using Web.Service.EmailAPI.Models;
 using Web.Service.EmailAPI.Models.Dto;
 using Web.Services.EmailAPI.Data;
+using Web.Services.EmailAPI.Message;
 
 namespace Web.Service.EmailAPI.Services
 {
@@ -37,6 +38,13 @@ namespace Web.Service.EmailAPI.Services
 
             await LogAndEmail(message.ToString(), cartDto.CartHeader.Email);
             await SendEmail(message.ToString(), cartDto.CartHeader.Email, "Shopping Cart");
+        }
+
+        public async Task LogOrderPlaced(RewardsMessage rewardsDto)
+        {
+            string message = "New Order Placed. <br/> Order ID : " + rewardsDto.OrderId;
+            await LogAndEmail(message, rewardsDto.Email);
+            await SendEmail(message, rewardsDto.Email, "New Order Placed");
         }
 
         public async Task RegisterUserEmailAndLog(string email)
