@@ -18,7 +18,8 @@ namespace WebApp.Service
             {
                 ApiType = SD.ApiType.POST,
                 Data = productDto,
-                Url = SD.ProductAPIBase + "/api/ProductAPI"
+                Url = SD.ProductAPIBase + "/api/ProductAPI",
+                ContentType = SD.ContentType.MultipartFormData
             });
         }
 
@@ -55,7 +56,8 @@ namespace WebApp.Service
             {
                 ApiType = SD.ApiType.PUT,
                 Data = productDto,
-                Url = SD.ProductAPIBase + "/api/ProductAPI"
+                Url = SD.ProductAPIBase + "/api/ProductAPI",
+                ContentType = SD.ContentType.MultipartFormData
             });
         }
     }

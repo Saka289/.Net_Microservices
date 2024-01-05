@@ -102,15 +102,18 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> ProductEdit(ProductDto productDto)
         {
-            ResponseDto? response = await _productService.UpdateProductsAsync(productDto);
-            if (response != null && response.IsSuccess)
+            if (ModelState.IsValid)
             {
-                TempData["success"] = response?.Message;
-                return RedirectToAction(nameof(ProductIndex));
-            }
-            else
-            {
-                TempData["error"] = response?.Message;
+                ResponseDto? response = await _productService.UpdateProductsAsync(productDto);
+                if (response != null && response.IsSuccess)
+                {
+                    TempData["success"] = response?.Message;
+                    return RedirectToAction(nameof(ProductIndex));
+                }
+                else
+                {
+                    TempData["error"] = response?.Message;
+                }
             }
             return View(productDto);
         }
