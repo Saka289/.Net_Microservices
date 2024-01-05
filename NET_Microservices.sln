@@ -23,11 +23,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Services.ShoppingCartAP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.MessageBus", "Web.MessageBus\Web.MessageBus.csproj", "{385C7E31-7855-450C-886D-920AB8653CB6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Service.EmailAPI", "Web.Service.EmailAPI\Web.Service.EmailAPI.csproj", "{9FDFAEAF-255C-4E22-BAA3-62B4E0C71571}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Services.EmailAPI", "Web.Service.EmailAPI\Web.Services.EmailAPI.csproj", "{9FDFAEAF-255C-4E22-BAA3-62B4E0C71571}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Service.OrderAPI", "Web.Service.OrderAPI\Web.Service.OrderAPI.csproj", "{7B67E029-806A-416C-805E-FE89B7FFE6A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Services.OrderAPI", "Web.Service.OrderAPI\Web.Services.OrderAPI.csproj", "{7B67E029-806A-416C-805E-FE89B7FFE6A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Services.RewardAPI", "Web.Services.RewardAPI\Web.Services.RewardAPI.csproj", "{8A52C04F-BC20-4A70-BC7E-C7D4C6772CBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Services.RewardAPI", "Web.Services.RewardAPI\Web.Services.RewardAPI.csproj", "{8A52C04F-BC20-4A70-BC7E-C7D4C6772CBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
