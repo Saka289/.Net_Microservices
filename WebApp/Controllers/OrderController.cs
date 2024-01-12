@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -17,11 +18,13 @@ namespace WebApp.Controllers
             _orderService = orderService;
         }
 
+        [Authorize]
         public IActionResult OrderIndex()
         {
             return View();
         }
 
+        [Authorize]
         public async Task<IActionResult> OrderDetail(int orderId)
         {
             OrderHeaderDto orderHeaderDto = new OrderHeaderDto();

@@ -1,0 +1,264 @@
+{
+  "Routes": [
+    //ProductAPI
+    {
+      "DownstreamPathTemplate": "/api/ProductAPI",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesproductapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/ProductAPI",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/ProductAPI/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesproductapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/ProductAPI/{id}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/ProductAPI",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesproductapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/ProductAPI",
+      "UpstreamHttpMethod": [ "Post", "Put" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    //CouponAPI
+    {
+      "DownstreamPathTemplate": "/api/CouponAPI",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicescouponapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/CouponAPI",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/CouponAPI/GetByCode/{code}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicescouponapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/CouponAPI/GetByCode/{code}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/CouponAPI/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicescouponapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/CouponAPI/{id}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/CouponAPI",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicescouponapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/CouponAPI",
+      "UpstreamHttpMethod": [ "Post", "Put" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    //OrderAPI
+    {
+      "DownstreamPathTemplate": "/api/OrderAPI/CreateOrder",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesorderapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/OrderAPI/CreateOrder",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/OrderAPI/CreateStripeSession",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesorderapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/OrderAPI/CreateStripeSession",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/OrderAPI/UpdateOrderStatus/{orderId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesorderapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/OrderAPI/UpdateOrderStatus/{orderId}",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/OrderAPI/ValidateStripeSession",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesorderapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/OrderAPI/ValidateStripeSession",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/OrderAPI/GetOrder/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesorderapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/OrderAPI/GetOrder/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/OrderAPI/GetOrders?userId={id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesorderapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/OrderAPI/GetOrders/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/OrderAPI/GetOrders?userId=''",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesorderapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/OrderAPI/GetOrders/",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    //ShoppingCartAPI
+    {
+      "DownstreamPathTemplate": "/api/CartAPI/ApplyCoupon",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesshoppingcartapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/CartAPI/ApplyCoupon",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/CartAPI/RemoveCoupon",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesshoppingcartapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/CartAPI/RemoveCoupon",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/CartAPI/RemoveCart",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesshoppingcartapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/CartAPI/RemoveCart",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/CartAPI/CartUpsert",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesshoppingcartapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/CartAPI/CartUpsert",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/CartAPI/EmailCartRequest",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesshoppingcartapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/CartAPI/EmailCartRequest",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/CartAPI/GetCart/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webservicesshoppingcartapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/CartAPI/GetCart/{userId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://webgatewaysolution.azurewebsites.net"
+  }
+}

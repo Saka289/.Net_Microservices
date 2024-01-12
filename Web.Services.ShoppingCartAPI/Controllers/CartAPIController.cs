@@ -142,6 +142,32 @@ namespace Web.Services.ShoppingCartAPI.Controllers
             return _response;
         }
 
+        [HttpPost("UpdateCart")]
+        public async Task<ResponseDto> UpdateCart([FromBody] string userId)
+        {
+            try
+            {
+                CartHeader cartHeader = _context.CartHeaders.First(u => u.UserId == userId);
+                if (cartHeader != null)
+                {
+                    var cartDetails = await _context.CartDetails.Where(u => u.CartHeaderId == cartHeader.CartHeaderId).ToListAsync();
+                    if (cartHeader != null)
+                    {
+                        _context.CartDetails.RemoveRange(cartDetails);
+                    }
+                    _context.CartHeaders.Remove(cartHeader);
+                }
+                await _context.SaveChangesAsync();
+                _response.Result = true;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message.ToString();
+            }
+            return _response;
+        }
+
         [HttpPost("ApplyCoupon")]
         public async Task<ResponseDto> ApplyCoupon([FromBody] CartDto cartDto)
         {

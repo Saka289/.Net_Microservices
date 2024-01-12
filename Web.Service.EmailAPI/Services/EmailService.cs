@@ -91,7 +91,7 @@ namespace Web.Service.EmailAPI.Services
                 using (var emailClient = new SmtpClient())
                 {
                     await emailClient.ConnectAsync("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
-                    await emailClient.AuthenticateAsync("sakanatsuma289@gmail.com", "icni xdjv imww gshb");
+                    await emailClient.AuthenticateAsync("sakanatsuma289@gmail.com", "rzlp xbgf xjiu cfqs");
                     await emailClient.SendAsync(emailToSend);
                     await emailClient.DisconnectAsync(true);
                 }

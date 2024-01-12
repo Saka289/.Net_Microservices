@@ -25,9 +25,10 @@ namespace Web.Service.OrderAPI.Controllers
         private readonly IMapper _mapper;
         private readonly AppDbContext _context;
         private readonly IProductService _productService;
+        private readonly ICartService _cartService;
         private readonly IMessageBus _messageBus;
 
-        public OrderAPIController(IMapper mapper, AppDbContext context, IProductService productService, IMessageBus messageBus, IConfiguration configuration)
+        public OrderAPIController(IMapper mapper, AppDbContext context, IProductService productService, IMessageBus messageBus, IConfiguration configuration, ICartService cartService)
         {
             _context = context;
             this._response = new ResponseDto();
@@ -35,11 +36,12 @@ namespace Web.Service.OrderAPI.Controllers
             _productService = productService;
             _messageBus = messageBus;
             _configuration = configuration;
+            _cartService = cartService;
         }
 
         [Authorize]
         [HttpGet("GetOrders")]
-        public async Task<ResponseDto> Get(string? userId = "")
+        public ResponseDto? Get(string? userId = "")
         {
             try
             {
@@ -64,7 +66,7 @@ namespace Web.Service.OrderAPI.Controllers
 
         [Authorize]
         [HttpGet("GetOrder/{id:int}")]
-        public async Task<ResponseDto> Get(int id)
+        public ResponseDto? Get(int id)
         {
             try
             {
@@ -194,6 +196,7 @@ namespace Web.Service.OrderAPI.Controllers
                         UserId = orderHeader.UserId,
                         Email = orderHeader.Email
                     };
+                    await _cartService.UpdateCart(orderHeader.UserId);
                     string topicName = _configuration.GetValue<string>("TopicAndQueueNames:OrderCreatedTopic");
                     await _messageBus.PublishMessage(rewardsDto, topicName);
                     _response.Result = _mapper.Map<OrderHeaderDto>(orderHeader);
