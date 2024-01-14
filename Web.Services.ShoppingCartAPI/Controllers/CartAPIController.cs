@@ -6,6 +6,7 @@ using Web.MessageBus;
 using Web.Services.ShoppingCartAPI.Data;
 using Web.Services.ShoppingCartAPI.Models;
 using Web.Services.ShoppingCartAPI.Models.Dto;
+using Web.Services.ShoppingCartAPI.RabbitMQSender;
 using Web.Services.ShoppingCartAPI.Service.IService;
 
 namespace Web.Services.ShoppingCartAPI.Controllers
@@ -19,10 +20,10 @@ namespace Web.Services.ShoppingCartAPI.Controllers
         private readonly AppDbContext _context;
         private readonly IProductService _productService;
         private readonly ICouponService _couponService;
-        private readonly IMessageBus _messageBus;
+        private readonly IRabbitMQCartMessageSender _messageBus;
         private readonly IConfiguration _configuration;
 
-        public CartAPIController(IMapper mapper, AppDbContext context, IProductService productService, ICouponService couponService, IMessageBus messageBus, IConfiguration configuration)
+        public CartAPIController(IMapper mapper, AppDbContext context, IProductService productService, ICouponService couponService, IRabbitMQCartMessageSender messageBus, IConfiguration configuration)
         {
             _context = context;
             this._response = new ResponseDto();
@@ -211,8 +212,7 @@ namespace Web.Services.ShoppingCartAPI.Controllers
         {
             try
             {
-                await _messageBus.PublishMessage(cartDto, _configuration.GetValue<string>("TopicAndQueueNames:EmailShoppingCartQueue"));
-
+                _messageBus.SendMessage(cartDto, _configuration.GetValue<string>("TopicAndQueueNames:EmailShoppingCartQueue"));
                 _response.Result = true;
             }
             catch (Exception ex)

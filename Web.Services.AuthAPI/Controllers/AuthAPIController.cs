@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Web.MessageBus;
 using Web.Services.AuthAPI.Models.Dto;
+using Web.Services.AuthAPI.RabbitMQSender;
 using Web.Services.AuthAPI.Service.IService;
 
 namespace Web.Services.AuthAPI.Controllers
@@ -11,11 +12,11 @@ namespace Web.Services.AuthAPI.Controllers
     public class AuthAPIController : ControllerBase
     {
         private readonly IAuthService _authService;
-        private readonly IMessageBus _messageBus;
+        private readonly IRabbitMQAuthMessageSender _messageBus;
         private readonly IConfiguration _configuration;
         protected ResponseDto _response;
 
-        public AuthAPIController(IAuthService authService, IMessageBus messageBus, IConfiguration configuration)
+        public AuthAPIController(IAuthService authService, IRabbitMQAuthMessageSender messageBus, IConfiguration configuration)
         {
             _authService = authService;
             _messageBus = messageBus;
@@ -35,7 +36,7 @@ namespace Web.Services.AuthAPI.Controllers
                 return BadRequest(_response);
             }
             _response.Message = "Registered successfully !!!";
-            await _messageBus.PublishMessage(model.Email, _configuration.GetValue<string>("TopicAndQueueNames:RegisterUserQueue"));
+            _messageBus.SendMessage(model.Email, _configuration.GetValue<string>("TopicAndQueueNames:RegisterUserQueue"));
             return Ok(_response);
         }
 

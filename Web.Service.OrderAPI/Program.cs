@@ -6,6 +6,7 @@ using Web.MessageBus;
 using Web.Services.OrderAPI;
 using Web.Services.OrderAPI.Data;
 using Web.Services.OrderAPI.Extensions;
+using Web.Services.OrderAPI.RabbitMQSender;
 using Web.Services.OrderAPI.Service.IService;
 using Web.Services.OrderAPI.Utility;
 using Web.Services.ShoppingCartAPI.Service;
@@ -25,7 +26,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
-builder.Services.AddScoped<IMessageBus, MessageBus>();
+builder.Services.AddScoped<IRabbitMQOrderMessageSender, RabbitMQOrderMessageSender>();
 
 builder.Services.AddHttpClient("Product", u => u.BaseAddress = new Uri(builder.Configuration["ServiceUrls:ProductAPI"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
 builder.Services.AddHttpClient("Cart", u => u.BaseAddress = new Uri(builder.Configuration["ServiceUrls:CartAPI"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();

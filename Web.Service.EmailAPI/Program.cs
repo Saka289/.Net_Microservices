@@ -3,6 +3,7 @@ using Web.Service.EmailAPI.Extension;
 using Web.Service.EmailAPI.Messaging;
 using Web.Service.EmailAPI.Services;
 using Web.Services.EmailAPI.Data;
+using Web.Services.EmailAPI.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,10 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer
 
 var optionBuilder = new DbContextOptionsBuilder<AppDbContext>();
 optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+
+builder.Services.AddHostedService<RabbitMQAuthConsumer>();
+builder.Services.AddHostedService<RabbitMQCartConsumer>();
+builder.Services.AddHostedService<RabbitMQOrderConsumer>();
 
 builder.Services.AddSingleton(new EmailService(optionBuilder.Options));
 

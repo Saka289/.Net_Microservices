@@ -3,6 +3,7 @@ using Web.Service.RewardAPI.Extension;
 using Web.Service.RewardAPI.Messaging;
 using Web.Service.RewardAPI.Services;
 using Web.Services.RewardAPI.Data;
+using Web.Services.RewardAPI.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer
 var optionBuilder = new DbContextOptionsBuilder<AppDbContext>();
 optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 builder.Services.AddSingleton(new RewardService(optionBuilder.Options));
+
+builder.Services.AddHostedService<RabbitMQOrderConsumer>();
 
 builder.Services.AddSingleton<IAzureServiceBusCosumer, AzureServiceBusCosumer>();
 

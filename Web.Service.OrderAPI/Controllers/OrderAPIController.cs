@@ -12,6 +12,7 @@ using Web.Service.OrderAPI.Models;
 using Web.Service.OrderAPI.Models.Dto;
 using Web.Service.OrderAPI.Utility;
 using Web.Services.OrderAPI.Data;
+using Web.Services.OrderAPI.RabbitMQSender;
 using Web.Services.OrderAPI.Service.IService;
 
 namespace Web.Service.OrderAPI.Controllers
@@ -26,9 +27,9 @@ namespace Web.Service.OrderAPI.Controllers
         private readonly AppDbContext _context;
         private readonly IProductService _productService;
         private readonly ICartService _cartService;
-        private readonly IMessageBus _messageBus;
+        private readonly IRabbitMQOrderMessageSender _messageBus;
 
-        public OrderAPIController(IMapper mapper, AppDbContext context, IProductService productService, IMessageBus messageBus, IConfiguration configuration, ICartService cartService)
+        public OrderAPIController(IMapper mapper, AppDbContext context, IProductService productService, IRabbitMQOrderMessageSender messageBus, IConfiguration configuration, ICartService cartService)
         {
             _context = context;
             this._response = new ResponseDto();
@@ -197,8 +198,8 @@ namespace Web.Service.OrderAPI.Controllers
                         Email = orderHeader.Email
                     };
                     await _cartService.UpdateCart(orderHeader.UserId);
-                    string topicName = _configuration.GetValue<string>("TopicAndQueueNames:OrderCreatedTopic");
-                    await _messageBus.PublishMessage(rewardsDto, topicName);
+                    string exchangeName = _configuration.GetValue<string>("TopicAndQueueNames:OrderCreatedTopic");
+                    _messageBus.SendMessage(rewardsDto, exchangeName);
                     _response.Result = _mapper.Map<OrderHeaderDto>(orderHeader);
                 }
             }

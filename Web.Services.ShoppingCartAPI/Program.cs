@@ -6,6 +6,7 @@ using Web.MessageBus;
 using Web.Services.ShoppingCartAPI;
 using Web.Services.ShoppingCartAPI.Data;
 using Web.Services.ShoppingCartAPI.Extensions;
+using Web.Services.ShoppingCartAPI.RabbitMQSender;
 using Web.Services.ShoppingCartAPI.Service;
 using Web.Services.ShoppingCartAPI.Service.IService;
 using Web.Services.ShoppingCartAPI.Utility;
@@ -25,7 +26,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICouponService, CouponService>();
 builder.Services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
-builder.Services.AddScoped<IMessageBus, MessageBus>();
+builder.Services.AddScoped<IRabbitMQCartMessageSender, RabbitMQCartMessageSender>();
 
 builder.Services.AddHttpClient("Product", u => u.BaseAddress = new Uri(builder.Configuration["ServiceUrls:ProductAPI"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
 builder.Services.AddHttpClient("Coupon", u => u.BaseAddress = new Uri(builder.Configuration["ServiceUrls:CouponAPI"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
